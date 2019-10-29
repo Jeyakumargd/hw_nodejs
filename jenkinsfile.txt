@@ -1,0 +1,19 @@
+pipeline
+{
+	agent any
+	stages
+	{
+		stage("build_docker_image")
+		{
+			docker build -t doc_img_nodejs_first .
+			docker tag doc_img_nodejs_first:NJS1 dhfirststep/nodejs_firststep:NJS1
+			docker push dhfirststep/nodejs_firststep:NJS1
+		}
+		
+		stage("upload_docker_hub")
+		{
+			docker tag doc_img_nodejs_first:NJS1 dhfirststep/nodejs_firststep:NJS1
+			docker push dhfirststep/nodejs_firststep:NJS1
+		}
+	}
+}
