@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "jeyakumargd/hw_nodejs"
+    registry = "dhfirststep/nodejs_firststep"
     registryCredential = 'doc_hub'
     dockerImage = ''
   }
