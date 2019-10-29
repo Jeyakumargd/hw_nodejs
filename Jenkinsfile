@@ -1,5 +1,4 @@
 node {
-    def app
     environment{
     registry = "jeyakumargd/hw_nodejs"
     registryCredential = 'docker-hub-credentials'
@@ -10,7 +9,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build registry + ":$BUILD_NUMBER"
+        app = docker.build(registry)
     }
 
     stage('Test image') {
