@@ -6,7 +6,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("jeyakumargd/hw_nodejs")
+        app = docker.build("jeyakumargd/hw_nodejs:${env.BUILD_NUMBER}")
     }
 
     stage('Test image') {
@@ -16,8 +16,8 @@ node {
     }
 
     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials' ) {
-            dockerImage.push()
+        docker.withRegistry('https://registry.hub.docker.com', 'doc_hub' ) {
+            app.push()
         }
     }
 }
