@@ -1,12 +1,16 @@
 node {
     def app
+    environment{
+    registry = "jeyakumargd/hw_nodejs"
+    registryCredential = 'docker-hub-credentials'
+    }
 
     stage('Clone repository') {
         checkout scm
     }
 
     stage('Build image') {
-        app = docker.build("jeyakumargd/hw_nodejs")
+        app = docker.build registry + ":$BUILD_NUMBER"
     }
 
     stage('Test image') {
@@ -16,9 +20,8 @@ node {
     }
 
     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+        docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
+            dockerImage.push()
         }
     }
 }
