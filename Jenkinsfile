@@ -1,15 +1,12 @@
 node {
-    environment{
-    registry = "jeyakumargd/hw_nodejs"
-    registryCredential = 'docker-hub-credentials'
-    }
+    def app
 
     stage('Clone repository') {
         checkout scm
     }
 
     stage('Build image') {
-        app = docker.build(registry)
+        app = docker.build("jeyakumargd/hw_nodejs")
     }
 
     stage('Test image') {
@@ -19,7 +16,7 @@ node {
     }
 
     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials' ) {
             dockerImage.push()
         }
     }
