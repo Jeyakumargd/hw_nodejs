@@ -1,4 +1,3 @@
-virtualkube@virtualkube:/var/app$ cat Dockerfile
 FROM ubuntu:18.04
 
 RUN apt-get update
