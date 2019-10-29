@@ -4,7 +4,7 @@ node {
     stage('pull images')
         {
         docker.withRegistry('', 'doc_hub') {
-            sh 'docker pull dhfirststep/nodejs_firststep/nodejs_app-20'
+            sh 'docker pull nodejs_app-20'
         }
     }
 
