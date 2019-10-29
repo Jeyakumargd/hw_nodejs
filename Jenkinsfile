@@ -1,19 +1,24 @@
-pipeline
-{
-	agent any
-	stages
-	{
-		stage("build_docker_image")
-		{
-			docker build -t doc_img_nodejs_first .
-			docker tag doc_img_nodejs_first:NJS1 dhfirststep/nodejs_firststep:NJS1
-			docker push dhfirststep/nodejs_firststep:NJS1
-		}
-		
-		stage("upload_docker_hub")
-		{
-			docker tag doc_img_nodejs_first:NJS1 dhfirststep/nodejs_firststep:NJS1
-			docker push dhfirststep/nodejs_firststep:NJS1
-		}
-	}
+node {
+    def app
+
+    stage('Clone repository') {
+        checkout scm
+    }
+
+    stage('Build image') {
+        app = docker.build("getintodevops/hellonode")
+    }
+
+    stage('Test image') {
+        app.inside {
+            sh 'echo "Tests passed"'
+        }
+    }
+
+    stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
+    }
 }
