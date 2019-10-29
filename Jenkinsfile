@@ -16,7 +16,7 @@ node {
     }
 
     stage('Push image') {
-        docker.withRegistry('https://cloud.docker.com/docker/dhfirststep/nodejs_firststep', 'doc_hub' ) {
+        docker.withRegistry('https://registry.hub.docker.com', 'doc_hub' ) {
             app.push()
         }
     }
