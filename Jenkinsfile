@@ -1,12 +1,5 @@
 node {
-    def app
-
-    stage('pull images')
-        {
-        docker.withRegistry('', 'doc_hub') {
-            sh 'docker pull nodejs_app-20'
-        }
-    }
+    
 
     stage('run application')
         {
