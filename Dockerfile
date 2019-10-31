@@ -9,3 +9,5 @@ RUN mkdir -p /var/app
 WORKDIR /var/app
 COPY main.js main.js
 CMD [ "node", "main.js" ]
+
+EXPOSE 8081
